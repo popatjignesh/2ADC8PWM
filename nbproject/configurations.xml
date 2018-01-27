@@ -13,7 +13,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="src" displayName="src" projectFiles="true">
-        <itemPath>../../PIC16/ADC-PWM.X/src/main.c</itemPath>
+        <itemPath>src/main.c</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -23,8 +23,8 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>src</Elem>
     <Elem>../../PIC16/ADC-PWM.X/src</Elem>
+    <Elem></Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
