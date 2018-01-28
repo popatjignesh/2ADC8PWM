@@ -9,11 +9,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define _XTAL_FREQ 8000000
+
 #define MCU_LED		LATDbits.LATD2      //MCU_LED Output PIN
 
 void ConfigCLK(void);
 void InitIO(void);
-void delay_ms(unsigned int count);
+//void delay_ms(unsigned int count);
 
 
 void main()
@@ -28,7 +30,7 @@ void main()
 	while(1)
     {
 		MCU_LED = ~MCU_LED;
-		delay_ms(1000);
+		__delay_ms(1000);
 	}
 }
 
@@ -62,6 +64,7 @@ void InitIO(void)
 	LATE = 0;
 }
 
+/*
 void delay_ms(unsigned int count)
 {
     for(unsigned int i = 0; i < count; i++)
@@ -69,3 +72,4 @@ void delay_ms(unsigned int count)
         for(unsigned int j = 0; j < 2000; j++);
     }
 }
+*/

@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define _XTAL_FREQ 8000000
+
 #define MAX_ADC 1024
 
 #define SW_MAIN     PORTAbits.RA0       //Main Switch
@@ -71,7 +73,7 @@ void CheckTEMPERATURE(void);
 void CheckIncDic(void);
 void CheckMode(void);
 
-void delay_ms(unsigned int count);
+//void delay_ms(unsigned int count);
 
 unsigned char temp8;
 unsigned char count;
@@ -208,7 +210,7 @@ void InitADC1(void)
     ADCON2bits.ADCS = 0b001;    //Fosc/8
     ADCON2bits.ACQT = 0b0001;   //2Tad
     ADCON0bits.ADON = 1;        //ADC is enabled
-    delay_ms(10);               //give 10ms delay as given in datasheet
+    __delay_ms(10);             //give 10ms delay as given in datasheet
     ADCON0bits.GO = 1;          //Start ADC
     while(ADCON0bits.GO);		//Wait till ADC Conversation complete
 	ADC1result = ADRES;         //Get ADC Result
@@ -227,7 +229,7 @@ void InitADC2(void)
     ADCON2bits.ADCS = 0b001;    //Fosc/8
     ADCON2bits.ACQT = 0b0001;   //2Tad
     ADCON0bits.ADON = 1;        //ADC is enabled
-    delay_ms(10);               //give 10ms delay as given in datasheet
+    __delay_ms(10);             //give 10ms delay as given in datasheet
     ADCON0bits.GO = 1;          //Start ADC
     while(ADCON0bits.GO);		//Wait till ADC Conversation complete
 	ADC2result = ADRES;         //Get ADC Result
@@ -433,8 +435,6 @@ void CheckMode(void)
             DisableAllPWM();
             FirePWM0347();
         }
-        while(SW_FW);
-		DisableAllPWM();
     }
 
     if(SW_RW)
@@ -448,8 +448,6 @@ void CheckMode(void)
             DisableAllPWM();
             FirePWM1256();
         }
-        while(SW_RW);
-		DisableAllPWM();
     }
 
     if(SW_DR)
@@ -463,8 +461,6 @@ void CheckMode(void)
             DisableAllPWM();
             FirePWM0356();
         }
-        while(SW_DR);
-		DisableAllPWM();
     }
 
     if(SW_DL)
@@ -478,11 +474,10 @@ void CheckMode(void)
             DisableAllPWM();
             FirePWM1247();
         }
-        while(SW_DL);
-		DisableAllPWM();
     }
 }
 
+/*
 void delay_ms(unsigned int count)
 {
     for(unsigned int i = 0; i < count; i++)
@@ -490,3 +485,4 @@ void delay_ms(unsigned int count)
         for(unsigned int j = 0; j < 2000; j++);
     }
 }
+*/
